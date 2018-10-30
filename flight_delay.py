@@ -40,11 +40,6 @@ def create_classes(y):
         #print(int(y[0]/15.0))
 	return y
 
-
-
-
-
-
 df.astype('float64')
 y = np.array(df['DEP_DELAY_NEW'])
 y = create_classes(y)
