@@ -56,8 +56,8 @@ pred=clf.predict(X_test)
 print(pred[0])
 print(y_test[0])
 
-for i in range(len(pred)):
-	print(pred[i])
+#for i in range(len(pred)):
+#	print(pred[i])
 	
 
 
