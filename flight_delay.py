@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing,model_selection,svm,neighbors,linear_model
+from sklearn import preprocessing,model_selection,neighbors,linear_model
+from sklearn.svm import SVC
 
-df = pd.read_csv("C:/Users/nilot/Downloads/flight_delay_prediction/flight_delay_prediction/dataset.csv")
+df = pd.read_csv("dataset.csv")
 df.drop(['YEAR',
 	'MONTH',
 	'DAY_OF_MONTH',
@@ -13,6 +14,7 @@ df.drop(['YEAR',
 	'ARR_DELAY',
 	'ARR_DEL15',
 	'SkyCondition'],1,inplace = True)
+
 
 for i in range(len(df['CANCELLED'])):
 	if(df['CANCELLED'][i] == 1):
@@ -32,9 +34,16 @@ df.fillna(df.mean(),inplace = True)
 
 def create_classes(y):
 	for i in range(len(y)):
-		y[i] = int(y[i]/15.0)
+		y[i] =int(y[i]/15.0)
+	        #print(y[i])
 		# print(y[i])
+        #print(int(y[0]/15.0))
 	return y
+
+
+
+
+
 
 df.astype('float64')
 y = np.array(df['DEP_DELAY_NEW'])
@@ -46,5 +55,15 @@ X_train,X_test,y_train,y_test = model_selection.train_test_split(X,y,test_size =
 
 clf = SVC(kernel="linear",gamma='auto',C=10)
 clf.fit(X_train,y_train)
+
+pred=clf.predict(X_test)
+
+print(pred[0])
+print(y_test[0])
+
+for i in range(len(pred)):
+	print(pred[i])
+	
+
 
 print(clf.score(X_test,y_test))
